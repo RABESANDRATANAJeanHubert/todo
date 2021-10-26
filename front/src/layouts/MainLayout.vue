@@ -15,7 +15,7 @@
           Todo
         </q-toolbar-title>
 
-        <div>Quasar version : {{ $q.version }}</div>
+        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
