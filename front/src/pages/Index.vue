@@ -1,49 +1,44 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+    {{input.email}}
+       <q-form
+      @submit="onSubmit"
+      class="q-gutter-md"
+    >
+      <q-input
+        filled
+        v-model="input.email"
+        label="Your email *"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please type something']"
+      />
+
+      <q-input
+        filled
+        type="password"
+        v-model="input.password"
+        label="Your password *"
+        lazy-rules
+        :rules="[
+          val => val !== null && val !== '' || 'Please type your age',
+        ]"
+      />
+      <q-btn :loading="loading" label="Submit" type="submit" color="primary"/>
+    </q-form>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
+import {useLogin} from '../firebase/user/login.service';
 
 export default defineComponent({
   name: 'PageIndex',
-  components: { ExampleComponent },
+  components: {  },
   setup() {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1'
-      },
-      {
-        id: 2,
-        content: 'ct2'
-      },
-      {
-        id: 3,
-        content: 'ct3'
-      },
-      {
-        id: 4,
-        content: 'ct44'
-      },
-      {
-        id: 5,
-        content: 'ct555'
-      }
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200
-    });
-    return { todos, meta };
+    return {
+      ...useLogin()
+    };
   }
 });
 </script>
