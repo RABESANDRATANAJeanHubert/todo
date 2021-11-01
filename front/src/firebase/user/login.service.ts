@@ -18,5 +18,6 @@ export const useLogin = () => {
     setTimeout(() => loading.value = false, 3000);
 
   }
-  return { input ,loading,onSubmit};
+  return { input, loading, onSubmit };
+
 }
