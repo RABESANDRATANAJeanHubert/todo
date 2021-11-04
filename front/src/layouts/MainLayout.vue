@@ -1,70 +1,93 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn flat round dense icon="assignment_ind" />
+  <div class="q-pa-md">
+    <q-layout view="lHh Lpr lFf" container style="height: 580px" class="shadow-2 rounded-borders">
+      <q-header reveal elevated>
+        <!-- <q-toolbar>
+          <q-btn flat round dense icon="menu" @click="drawerLeft = !drawerLeft" />
 
-        <q-toolbar-title>Quasar</q-toolbar-title>
+          <q-toolbar-title>
+            <strong>Quasar</strong> Framework
+          </q-toolbar-title>
 
-        <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
-        <q-btn flat round dense icon="gamepad"/>
-      </q-toolbar>
-      <q-toolbar inset>
-        <q-breadcrumbs active-color="white" style="font-size: 16px">
-          <q-breadcrumbs-el to="/" clickable label="Product" icon="Product"/>
-          <q-breadcrumbs-el to="/category" clickable label="category" icon="widgets"/>
-          <q-breadcrumbs-el label="Toolbar" />
-        </q-breadcrumbs>
-        <q-toolbar-title>
-          Todo
-        </q-toolbar-title>
+          <q-btn flat round dense icon="menu" @click="drawerRight = !drawerRight" />
+        </q-toolbar> -->
 
-        <div>Quasar v1{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+<!-- header -->
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
+    <q-toolbar class="bg-secondary text-white  shadow-2">
+      <q-btn flat round dense icon="menu" @click="drawerLeft = !drawerLeft" />
+      <q-space />
+      <q-btn-toggle
+        v-model="model"
+        flat stretch
+        toggle-color="yellow"
+        :options="options"
+      />
+    </q-toolbar>
 
-      </q-list>
+<!-- header -->
+
+      </q-header>
+
+      <q-footer reveal elevated>
+        <q-toolbar>
+          <q-btn flat round dense icon="menu" @click="drawerLeft = !drawerLeft" />
+
+          <q-toolbar-title>
+            <strong>Quasar</strong> Framework
+          </q-toolbar-title>
+
+          <q-btn flat round dense icon="menu" @click="drawerRight = !drawerRight" />
+        </q-toolbar>
+      </q-footer>
+
+      <q-drawer
+        v-model="drawerLeft"
+        show-if-above
+        :width="200"
+        :breakpoint="400"
+      >
         <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
           <q-list padding>
-            <q-item 
-            to="/"
-            clickable v-ripple>
+            <q-item clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="Home"/>
+                <q-icon name="star" />
               </q-item-section>
 
               <q-item-section>
-                Product
+                Formation et diplome
               </q-item-section>
             </q-item>
-            <q-item 
-            to="/category"
-            clickable v-ripple>
+
+            <q-item active clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="About"/>
+                <q-icon name="star"/>
               </q-item-section>
 
               <q-item-section>
-                Category
+                Star
               </q-item-section>
             </q-item>
-                    <q-item-label
-          header
-        >
-        Liens essentiels
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="Home" />
+              </q-item-section>
+
+              <q-item-section>
+                Send
+              </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="send" />
+              </q-item-section>
+
+              <q-item-section>
+                Drafts
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-scroll-area>
 
@@ -77,86 +100,90 @@
             <div>@rstoenescu</div>
           </div>
         </q-img>
-    </q-drawer>
-   <q-footer reveal elevated>
-        <q-toolbar>
-          <q-toolbar-title>Footer</q-toolbar-title>
-        </q-toolbar>
-      </q-footer>
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+      </q-drawer>
+      <q-drawer
+        side="right"
+        v-model="drawerRight"
+        bordered
+        :width="150"
+        :breakpoint="500"
+        behavior="desktop"
+        class="bg-grey-3"
+      >
+
+        <q-scroll-area class="fit">
+          <div class="q-pa-sm">
+            <div v-for="n in 50" :key="n">Drawer {{ n }} / 50</div>
+          </div>
+        </q-scroll-area>
+
+      </q-drawer>
+
+      <q-page-container>
+        <q-page padding>
+          <p v-for="n in 15" :key="n">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
+          </p>
+
+          <!-- place QPageSticky at end of page -->
+          <q-page-sticky position="top-left" :offset="[18, 18]">
+            <q-btn round color="accent" icon="arrow_back" class="rotate-45" />
+          </q-page-sticky>
+          <q-page-sticky position="top" :offset="[0, 18]">
+            <q-btn round color="accent" icon="arrow_back" class="rotate-90" />
+          </q-page-sticky>
+          <q-page-sticky position="top-right" :offset="[18, 18]">
+            <q-btn round color="accent" icon="arrow_upward" class="rotate-45" />
+          </q-page-sticky>
+          <q-page-sticky position="right" :offset="[18, 0]">
+            <q-btn round color="accent" icon="arrow_upward" class="rotate-90" />
+          </q-page-sticky>
+          <q-page-sticky position="left" :offset="[18, 0]">
+            <q-btn round color="accent" icon="arrow_back" />
+          </q-page-sticky>
+          <q-page-sticky position="bottom-left" :offset="[18, 18]">
+            <q-btn round color="accent" icon="arrow_forward" class="rotate-135" />
+          </q-page-sticky>
+          <q-page-sticky position="bottom" :offset="[0, 18]">
+            <q-btn round color="accent" icon="arrow_forward" class="rotate-90" />
+          </q-page-sticky>
+          <q-page-sticky position="bottom-right" :offset="[18, 18]">
+            <q-btn round color="accent" icon="arrow_forward" class="rotate-45" />
+          </q-page-sticky>
+        </q-page>
+      </q-page-container>
+    </q-layout>
+  </div>
 </template>
- 
-<script lang="ts">
-import EssentialLink from 'components/EssentialLink.vue'
+
+<script>
+
+import { useQuasar } from 'quasar'
+import { ref } from 'vue'
 
 
-const linksList = [
-  // {
-  //   title: 'Docs',
-  //   caption: 'quasar.dev',
-  //   icon: 'school',
-  //   link: 'https://quasar.dev'
-  // },
-  // {
-  //   title: 'Github',
-  //   caption: 'github.com/quasarframework',
-  //   icon: 'code',
-  //   link: 'https://github.com/quasarframework'
-  // },
-  // {
-  //   title: 'Discord Chat Channel',
-  //   caption: 'chat.quasar.dev',
-  //   icon: 'chat',
-  //   link: 'https://chat.quasar.dev'
-  // },
-  // {
-  //   title: 'Todo',
-  //   // caption: 'forum.quasar.dev',
-  //   icon: 'Setting',
-  //   // link: 'https://forum.quasar.dev'
-  // },
-  // {
-  //   title: 'Twitter',
-  //   caption: '@quasarframework',
-  //   icon: 'rss_feed',
-  //   link: 'https://twitter.quasar.dev'
-  // },
-  // {
-    // title: 'Facebook',
-    // caption: '@QuasarFramework',
-    // icon: 'public',
-    // link: 'https://facebook.quasar.dev'
-  // },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
 
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  name: 'MainLayout',
-
-  components: {
-    EssentialLink
-  },
-
+export default {
   setup () {
-    const leftDrawerOpen = ref(false)
+    const $q = useQuasar()
 
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      drawerLeft: ref($q.screen.width > 700),
+      drawerRight: ref($q.screen.width > 500),
+        drawer: ref(false),
+
+
+            model: ref('one'),
+
+      options: [
+        { label: 'Formations et Diplome', value: 'one' },
+        { label: 'Experience Professionnelle', value: 'two' },
+        { label: 'Competances', value: 'three' },
+         { label: 'Competances Linguistique', value: 'four' },
+          { label: 'Activites Et Sports', value: 'five' }
+      ]
+
     }
   }
-})
+}
 </script>
