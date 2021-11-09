@@ -2,15 +2,6 @@
   <div class="q-pa-md">
     <q-layout view="lHh Lpr lFf" container style="height: 580px" class="shadow-2 rounded-borders">
       <q-header reveal elevated>
-        <!-- <q-toolbar>
-          <q-btn flat round dense icon="menu" @click="drawerLeft = !drawerLeft" />
-
-          <q-toolbar-title>
-            <strong>Quasar</strong> Framework
-          </q-toolbar-title>
-
-          <q-btn flat round dense icon="menu" @click="drawerRight = !drawerRight" />
-        </q-toolbar> -->
 
 <!-- header -->
 
@@ -49,45 +40,31 @@
       >
         <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
           <q-list padding>
-            <q-item clickable v-ripple>
+            <q-item
+            to="/"
+             clickable
+              v-ripple>
               <q-item-section avatar>
-                <q-icon name="star" />
+                <q-icon name="menu" />
               </q-item-section>
 
               <q-item-section>
-                Formation et diplome
+               INFORMATION
               </q-item-section>
             </q-item>
 
-            <q-item active clickable v-ripple>
+            <q-item
+              to="/category"
+            active clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="star"/>
+                <q-icon name="link"/>
               </q-item-section>
 
               <q-item-section>
-                Star
+                LINK
               </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="Home" />
-              </q-item-section>
-
-              <q-item-section>
-                Send
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section>
-                Drafts
-              </q-item-section>
-            </q-item>
           </q-list>
         </q-scroll-area>
 
@@ -120,37 +97,7 @@
       </q-drawer>
 
       <q-page-container>
-        <q-page padding>
-          <p v-for="n in 15" :key="n">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-          </p>
-
-          <!-- place QPageSticky at end of page -->
-          <q-page-sticky position="top-left" :offset="[18, 18]">
-            <q-btn round color="accent" icon="arrow_back" class="rotate-45" />
-          </q-page-sticky>
-          <q-page-sticky position="top" :offset="[0, 18]">
-            <q-btn round color="accent" icon="arrow_back" class="rotate-90" />
-          </q-page-sticky>
-          <q-page-sticky position="top-right" :offset="[18, 18]">
-            <q-btn round color="accent" icon="arrow_upward" class="rotate-45" />
-          </q-page-sticky>
-          <q-page-sticky position="right" :offset="[18, 0]">
-            <q-btn round color="accent" icon="arrow_upward" class="rotate-90" />
-          </q-page-sticky>
-          <q-page-sticky position="left" :offset="[18, 0]">
-            <q-btn round color="accent" icon="arrow_back" />
-          </q-page-sticky>
-          <q-page-sticky position="bottom-left" :offset="[18, 18]">
-            <q-btn round color="accent" icon="arrow_forward" class="rotate-135" />
-          </q-page-sticky>
-          <q-page-sticky position="bottom" :offset="[0, 18]">
-            <q-btn round color="accent" icon="arrow_forward" class="rotate-90" />
-          </q-page-sticky>
-          <q-page-sticky position="bottom-right" :offset="[18, 18]">
-            <q-btn round color="accent" icon="arrow_forward" class="rotate-45" />
-          </q-page-sticky>
-        </q-page>
+      <router-view />
       </q-page-container>
     </q-layout>
   </div>
@@ -160,8 +107,6 @@
 
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
-
-
 
 export default {
   setup () {
@@ -176,11 +121,31 @@ export default {
             model: ref('one'),
 
       options: [
-        { label: 'Formations et Diplome', value: 'one' },
-        { label: 'Experience Professionnelle', value: 'two' },
-        { label: 'Competances', value: 'three' },
-         { label: 'Competances Linguistique', value: 'four' },
-          { label: 'Activites Et Sports', value: 'five' }
+
+        {  to:'/formation',
+          label: 'Formations et Diplome',
+          value: 'one'
+        },
+
+        { to:'/experience',
+          label: 'Experience Professionnelle',
+          value: 'two'
+         },
+
+        { to:'/competence',
+          label: 'Competances',
+          value: 'three',
+          },
+
+         { to:'/competencelinguistique',
+           label: 'Competances Linguistique',
+           value: 'four'
+          },
+
+          { to:'/activate',
+            label: 'Activites Et Sports',
+            value: 'five'
+          }
       ]
 
     }

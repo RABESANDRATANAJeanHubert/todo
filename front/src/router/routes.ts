@@ -12,6 +12,28 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/category',
         component: () => import('src/pages/PageCategory.vue')
+      },
+      {
+        path: '/formation',
+        component: () => import('src/pages/Formation.vue')
+      },
+      {
+        path: '/experience',
+        component: () => import('src/pages/Experienceprof.vue')
+      },
+      {
+        path: '/competence',
+        component: () => import('src/pages/Competence.vue')
+      },
+      {
+        path: '/competencelinguistique',
+
+        component: () => import('src/pages/Competlinguistique.vue')
+      },
+      {
+        path: '/activate',
+
+        component: () => import('src/pages/Activitesport.vue')
       }
     ],
   },
